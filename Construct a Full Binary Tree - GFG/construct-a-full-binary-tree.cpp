@@ -37,7 +37,7 @@ class Solution{
             return NULL;
         }
         int j=0;
-        for(;j<n;j++){
+        for(j;j<n;j++){
             if(preMirror[j]==pre[i]){
                 break;
             }
