@@ -9,31 +9,25 @@ class Solution
     string reverseEqn (string s)
         {
             //code here.
-            string temp="";
-            int i=0;
-            stack<string> st;
-            while(i<s.size()){
-                string no="";
-                while(i<s.size()&& s[i]>='0'&&s[i]<='9'){
-                    no+=s[i++];
-                }
-                if(no!=""){
-                    st.push(no);
-                    no="";
-                }
-                if(i<s.size()){
-                    string ans="";
+            stack<char>st;
+            string ans="";
+            for(int i=s.length()-1;i>=0;i--){
+                if(s[i]=='+'||s[i]=='-'||s[i]=='*'||s[i]=='/'){
+                    while(!st.empty()){
+                        ans+=st.top();
+                        st.pop();
+                    }
                     ans+=s[i];
-                    st.push(ans);
                 }
-                i++;
+                else{
+                    st.push(s[i]);
+                }
             }
             while(!st.empty()){
-               temp+=st.top();
-               st.pop();
+                ans+=st.top();
+                st.pop();
             }
-            return temp;
-            
+            return ans;
         }
 };
 
