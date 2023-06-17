@@ -8,36 +8,17 @@ using namespace std;
 class Solution {
   public:
     int distributeTicket(int N, int K) {
-        bool f=false;
-        int temp=K;
-        int ans=1;
-        int ans1=N;
-        while(N!=0){
-            if(f){
-                while(K!=0&&N!=0){
-                   ans1--;
-                   K--;
-                   N--;
-                }
-                f=false;
-                K=temp;
-            }
-            else{
-                while(K!=0&&N!=0){
-                    ans++;
-                    K--;
-                    N--;
-                }
-                f=true;
-                 K=temp;
-            }
-        }
-        if(f){
-            return ans1;
-        }
-        return ans;
+        // code here
+         int left = 1;
+       int right = N;
+       while(left < right) {
+           int kk = K;
+           while(left < right && kk--) left++;
+           kk = K;
+           while(left < right && kk--) right--;
+       }
+       return left;
     }
-    
 };
 
 
