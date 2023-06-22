@@ -10,18 +10,14 @@ class Solution {
         // code here
         int ten=0;
         int five=0;
-        int money=0;
         for(int i=0;i<N;i++){
             int x=bills[i];
             if(x==5){
                 five++;
-                money+=5;
-                continue;
             }
            else if(x==10){
                 if(five>0){
                     five--;
-                    money+=10;
                     ten++;
                 }
                 else{
