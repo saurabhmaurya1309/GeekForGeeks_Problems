@@ -23,8 +23,9 @@ class Solution
         if(mp[maxFreq] > (S + 1) / 2) return "-1";
         
         int idx = 0;
+        string ans=str;
         while(mp[maxFreq]) {
-            str[idx] = maxFreq;
+            ans[idx] = maxFreq;
             idx += 2;
             mp[maxFreq]--;
         }
@@ -34,13 +35,14 @@ class Solution
             int cnt = pr.second;
             while(cnt > 0) {
                 if(idx >= S) idx = 1;
-                str[idx] = ch;
+                ans[idx] = ch;
                 idx += 2;
                 cnt--;
             }
         }
+        // cout<<str<<endl;
         
-        return str;
+        return ans;
     }
     
 };
