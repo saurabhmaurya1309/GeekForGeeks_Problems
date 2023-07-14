@@ -24,11 +24,42 @@ class Solution
         return dp[i][j]=max(ans1,ans2);
     }
     //Function to find the length of longest common subsequence in two strings.
+    int solveTab(string s1,string s2,int n,int m){
+        vector<vector<int>>dp(n+1,vector<int>(m+1,0));
+        for(int i=0;i<n;i++){
+            dp[i][m]=0;
+        }
+        for(int i=0;i<m;i++){
+            dp[n][i]=0;
+        }
+        for(int i=n-1;i>=0;i--){
+            for(int j=m-1;j>=0;j--){
+                if(s1[i]==s2[j]){
+                    dp[i][j]=(1+dp[i+1][j+1]);
+                    // cout<<dp[i][j]<<" "<<dp[i+1][j+1]<<endl;
+                }
+                else{
+                int ans1=dp[i+1][j];
+                int ans2=dp[i][j+1];
+                
+                dp[i][j]=max(ans1,ans2);
+                }
+            }
+        }
+        // for(int i=0;i<=n;i++){
+        //     for(int j=0;j<=m;j++){
+        //         cout<<dp[i][j]<<" ";
+        //     }cout<<endl;
+        // }
+        return dp[0][0];
+        
+    }
     int lcs(int n, int m, string s1, string s2)
     {
         // your code here
-        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
-        return solve(0,0,s1,s2,dp);
+        // vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+        // return solve(0,0,s1,s2,dp);
+        return solveTab(s1,s2,n,m);
     }
 };
 
