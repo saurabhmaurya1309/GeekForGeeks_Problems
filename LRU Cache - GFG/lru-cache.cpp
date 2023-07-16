@@ -66,7 +66,7 @@ class LRUCache
     //Function for storing key-value pair.
     void SET(int key, int value)
     {
-        Node *curr=NULL;
+        // Node *curr=NULL;
         if(map.find(key)!=map.end()){
             
             deletenode(map[key]);
