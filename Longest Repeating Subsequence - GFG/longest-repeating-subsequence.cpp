@@ -5,35 +5,15 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 	public:
-	    int solve(int i,int j,string A,string B,vector<vector<int>>&dp){
-	       // cout<<"h";
-	        if(i>=A.length()||j>=B.length()){
-	           // cout<<"h";
-	            return 0;
-	        }
-	       if(dp[i][j]!=-1){
-	           return dp[i][j];
-	       }     
-	        if(A[i]==B[j]&&i!=j){
-	           dp[i][j]=1+solve(i+1,j+1,A,B,dp);
-	           return dp[i][j];
-	        }  
-	       else{
-	            int ans1=0,ans2=0;
-	            ans1=solve(i+1,j,A,B,dp);
-	            ans2=solve(i,j+1,A,B,dp);
-	            dp[i][j]= max(ans1,ans2); 
-	            return dp[i][j];
-	       }
-	    }
+	    
 	    int solveTab(string A){
 	        string B=A;
 	        int n=A.length();
 	        vector<vector<int>>dp(n+1,vector<int>(n+1,0));
-	        for(int i=0;i<=n;i++){
-	            dp[i][n]=0;
-	            dp[n][i]=0;
-	        }
+	       // for(int i=0;i<=n;i++){
+	       //     dp[i][n]=0;
+	       //     dp[n][i]=0;
+	       // }
 	        for(int i=n-1;i>=0;i--){
 	            for(int j=n-1;j>=0;j--){
 	                 if(A[i]==B[j]&&i!=j)
@@ -49,13 +29,29 @@ class Solution {
 	        return dp[0][0];
 	        
 	    }
+	    int space(string A){
+	        string B=A;
+	         int n=A.length();
+	       vector<int>curr(n+1,0);
+	       vector<int>next(n+1,0);
+	      
+	        for(int i=n-1;i>=0;i--){
+	            for(int j=n-1;j>=0;j--){
+	                 if(A[i]==B[j]&&i!=j)
+	                    curr[j]=1+next[j+1];
+        	       else{
+        	            int ans1=0,ans2=0;
+        	            ans1=next[j];
+        	            ans2=curr[j+1];
+        	            curr[j]= max(ans1,ans2); 
+        	       }
+	            }
+	            next=curr;
+	        }
+	        return curr[0];
+	    }
 		int LongestRepeatingSubsequence(string A){
-		    // Code here
-		  //  string B=A;
-		  //  int n=A.length();
-		  ////  cout<<B<<endl;
-		  //  vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
-		  //  return solve(0,0,A,B,dp);
+		  
 		    return  solveTab( A);
 		}
 
