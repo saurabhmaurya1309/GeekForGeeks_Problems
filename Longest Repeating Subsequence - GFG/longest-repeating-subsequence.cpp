@@ -52,7 +52,7 @@ class Solution {
 	    }
 		int LongestRepeatingSubsequence(string A){
 		  
-		    return  solveTab( A);
+		    return  space( A);
 		}
 
 };
