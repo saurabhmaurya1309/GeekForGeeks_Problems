@@ -70,7 +70,7 @@ class Solution
             count++;
         }
         // if(forword!=NULL){
-            head->next=reverse(forword,k);
+            head->next=reverse(curr,k);
         // }
         return prev;
     }
