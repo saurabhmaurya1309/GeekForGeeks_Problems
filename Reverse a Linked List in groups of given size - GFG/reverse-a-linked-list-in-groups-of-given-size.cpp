@@ -69,9 +69,9 @@ class Solution
             curr=forword;
             count++;
         }
-        if(forword!=NULL){
+        // if(forword!=NULL){
             head->next=reverse(forword,k);
-        }
+        // }
         return prev;
     }
 };
