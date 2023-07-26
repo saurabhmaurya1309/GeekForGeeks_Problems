@@ -113,7 +113,7 @@ struct Node
 };
 */
 // your task is to complete this function
-void solve(Node *root, int k, int node,vector<int>&ans,int &result){
+void solve(Node *root, int k, int node,vector<int>ans,int &result){
     if(root==NULL){
         return;
     }
@@ -131,7 +131,7 @@ void solve(Node *root, int k, int node,vector<int>&ans,int &result){
     
      ans.push_back(root->data);
     solve(root->left,k,node,ans,result);
-    // ans.pop_back();
+    
     solve(root->right,k,node,ans,result);
      ans.pop_back();
     
