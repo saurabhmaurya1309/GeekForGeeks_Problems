@@ -16,13 +16,15 @@ public:
         
         int i=0;
         while(i<n){
-            char c = s[i];
-            int freq = 0;
-            while(s[i] == c)
-                freq++, i++;
-            
-            if(freq == 1)
-                res += c;
+           if(i<n-1&&s[i]==s[i+1]){
+               while(i<n-1&&s[i]==s[i+1]){
+                   i++;
+               }
+           }
+               else{
+                   res+=s[i];
+               }
+               i++;
         }
         
         if(res == s)
