@@ -16,7 +16,7 @@ public:
         int ans=INT_MAX;
         sort(arr,arr+N);
         for(int i=0;i<N-1;i++){
-            int x=arr[i] xor arr[i+1];
+            int x=arr[i] ^ arr[i+1];
             ans=min(ans,x);
         }
         return ans;
