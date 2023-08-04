@@ -5,36 +5,20 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-    int ans = 0;
     
-    int solve(string &a, string &b, int i, int j, vector<vector<int>> &dp) {
-        
-        if(i >= a.size() || j >= b.size()) {
-            return 0;
-        }
-        
-        if(dp[i][j] != -1) return dp[i][j];
-        
-        int maxi = 0;
-        
-        if(a[i] == b[j]) {
-            maxi = solve(a, b, i + 1, j + 1, dp) + 1;
-            ans = max(ans, maxi);
-        }
-        
-        return dp[i][j] = maxi;
-    }
-    int longestCommonSubstr (string S1, string S2, int n, int m)
+    int longestCommonSubstr (string s1, string s2, int n, int m)
     {
         // your code here
-        vector<vector<int>> dp(n+1, vector<int> (m+1, -1));
-        
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                solve(S1, S2, i, j, dp);
+        vector<vector<int>>dp(n+1,vector<int>(m+1,0));
+        int ans=0;
+        for(int i=1;i<n+1;i++){
+            for(int j=1;j<m+1;j++){
+                if(s1[i-1]==s2[j-1]){
+                    dp[i][j]=1+dp[i-1][j-1];
+                }
+               ans=max(ans,dp[i][j]);
             }
         }
-        
         return ans;
     }
 };
