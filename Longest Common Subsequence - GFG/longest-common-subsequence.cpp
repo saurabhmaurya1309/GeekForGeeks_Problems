@@ -9,57 +9,29 @@ using namespace std;
 class Solution
 {
     public:
-    int solve(int i,int j, string &s1,string &s2,vector<vector<int>>&dp){
-        if(i==s1.size()||j==s2.size()){
+    //Function to find the length of longest common subsequence in two strings.
+    int solve(int n,int m,string &s1,string &s2,vector<vector<int>>&dp){
+        if(n<0||m<0){
             return 0;
         }
-        if(dp[i][j]!=-1){
-            return dp[i][j];
+        if(dp[n][m]!=-1){
+            return dp[n][m];
         }
-        if(s1[i]==s2[j]){
-            return 1+solve(i+1,j+1,s1,s2,dp);
+        if(s1[n]==s2[m]){
+             dp[n][m]=1+solve(n-1,m-1,s1,s2,dp);
+             return dp[n][m];
         }
-        int ans1=solve(i+1,j,s1,s2,dp);
-        int ans2=solve(i,j+1,s1,s2,dp);
-        return dp[i][j]=max(ans1,ans2);
-    }
-    //Function to find the length of longest common subsequence in two strings.
-    int solveTab(string s1,string s2,int n,int m){
-        vector<vector<int>>dp(n+1,vector<int>(m+1,0));
-        for(int i=0;i<n;i++){
-            dp[i][m]=0;
+        else{
+            int ans1=solve(n-1,m,s1,s2,dp);
+            int ans2=solve(n,m-1,s1,s2,dp);
+            return dp[n][m]=max(ans1,ans2);
         }
-        for(int i=0;i<m;i++){
-            dp[n][i]=0;
-        }
-        for(int i=n-1;i>=0;i--){
-            for(int j=m-1;j>=0;j--){
-                if(s1[i]==s2[j]){
-                    dp[i][j]=(1+dp[i+1][j+1]);
-                    // cout<<dp[i][j]<<" "<<dp[i+1][j+1]<<endl;
-                }
-                else{
-                int ans1=dp[i+1][j];
-                int ans2=dp[i][j+1];
-                
-                dp[i][j]=max(ans1,ans2);
-                }
-            }
-        }
-        // for(int i=0;i<=n;i++){
-        //     for(int j=0;j<=m;j++){
-        //         cout<<dp[i][j]<<" ";
-        //     }cout<<endl;
-        // }
-        return dp[0][0];
-        
     }
     int lcs(int n, int m, string s1, string s2)
     {
         // your code here
-        // vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
-        // return solve(0,0,s1,s2,dp);
-        return solveTab(s1,s2,n,m);
+        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+        return solve(n-1,m-1,s1,s2,dp);
     }
 };
 
