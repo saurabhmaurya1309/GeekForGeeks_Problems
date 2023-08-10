@@ -30,7 +30,7 @@ class Solution
     int lcs(int n, int m, string s1, string s2)
     {
         // your code here
-        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
+        vector<vector<int>>dp(n,vector<int>(m,-1));
         return solve(n-1,m-1,s1,s2,dp);
     }
 };
