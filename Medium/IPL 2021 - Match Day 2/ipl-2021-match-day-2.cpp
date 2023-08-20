@@ -6,28 +6,33 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    vector<int> max_of_subarrays(vector<int> nums, int n, int k) {
+    vector<int> max_of_subarrays(vector<int> arr, int n, int k) {
         // your code here
-        deque<int>dq;
+        
+         int i=0;
+        int j=0;
         vector<int>ans;
-
-        for(int i = 0 ; i<n ;i++){
-        //we can keep index of element of nums[i] , which is in range of              window(idx <=i-k)
-            while(!dq.empty() && dq.front() <= i-k){
-                dq.pop_front();
+        deque<int>l;
+        while(j<n)
+        {
+            while(l.size()>0 && l.back()<arr[j]){
+                l.pop_back();
             }
-            //step-2: pop element from deque till we get large element 
-            while( !dq.empty() && nums[i] > nums[dq.back()]){
-                dq.pop_back();
-            }
-            // step-3 
-            dq.push_back(i);
-            //step-4 for every window we store deque front element in ans vector 
-            if(i >= k-1){
-                ans.push_back(nums[dq.front()]);
-            }
+            l.push_back(arr[j]);
+          if(j-i+1<k)  {
+              j++;
+          }
+          else if(j-i+1==k){
+              ans.push_back(l.front());
+              if(l.front()==arr[i])
+              l.pop_front();
+              i++;
+              j++;
+              
+          }
         }
         return ans;
+    
     }
 };
 
