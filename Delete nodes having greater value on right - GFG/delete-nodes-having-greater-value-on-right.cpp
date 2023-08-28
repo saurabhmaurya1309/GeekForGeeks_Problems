@@ -49,48 +49,48 @@ class Solution
     Node *compute(Node *head)
     {
         // your code goes here
-    //     Node*first=head;
-    //     Node*second=head->next;
-    //     Node*prev=NULL;
-    //     while(second!=NULL){
-    //         if(first->data<=second->data){
-    //           if(first==head){
-    //               head=second;
-    //                 first=first->next;
-    //               second=second->next;
-    //               prev=NULL;
-    //           }
-    //           else{
-    //               prev->next=second;
-    //               delete(first);
-    //               first=prev;
-    //             //   second=second->next;
-    //             prev=NULL;
+        Node*first=head;
+        Node*second=head->next;
+        Node*prev=NULL;
+        while(second!=NULL){
+            if(first->data<second->data){
+              if(first==head){
+                  head=second;
+                    first=first->next;
+                  second=second->next;
+                  prev=NULL;
+              }
+              else{
+                  prev->next=second;
+                  delete(first);
+                  first=head;
+                  second=head->next;
+                prev=NULL;
                    
-    //           }
+              }
                 
                 
-    //         }
-    //         else{
-    //             prev=first;
-    //             first=first->next;
-    //             second=second->next;
-    //         }
-    //     }
-    //     return head;
-    // }
-    Node* curr = head;
-while(curr->next){
-    if(curr->data < curr->next->data){
-        curr->data = curr->next->data;
-        Node* temp = curr->next;
-        curr->next = curr->next->next;
-        delete temp;
-        curr = head;
+            }
+            else{
+                prev=first;
+                first=first->next;
+                second=second->next;
+            }
+        }
+        return head;
     }
-    else curr = curr->next;
-}
-return head;}
+//     Node* curr = head;
+// while(curr->next){
+//     if(curr->data < curr->next->data){
+//         curr->data = curr->next->data;
+//         Node* temp = curr->next;
+//         curr->next = curr->next->next;
+//         delete temp;
+//         curr = head;
+//     }
+//     else curr = curr->next;
+// }
+// return head;}
     
 };
    
