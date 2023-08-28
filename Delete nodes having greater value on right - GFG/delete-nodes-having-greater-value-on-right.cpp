@@ -28,73 +28,73 @@ void print(Node *root)
 
 
 // } Driver Code Ends
-/*
-
-The structure of linked list is the following
-
-struct Node
-{
-    int data;
-    Node* next;
-    
-    Node(int x){
-        data = x;
-        next = NULL;
-    }
-};
-*/
 class Solution
 {
     public:
     Node *compute(Node *head)
     {
-        // your code goes here
-        Node*first=head;
-        Node*second=head->next;
-        Node*prev=NULL;
-        while(second!=NULL){
-            if(first->data<second->data){
-              if(first==head){
-                  head=second;
-                    first=first->next;
-                  second=second->next;
-                  prev=NULL;
-              }
-              else{
-                  prev->next=second;
-                  delete(first);
-                  first=head;
-                  second=head->next;
-                prev=NULL;
-                   
-              }
-                
-                
-            }
-            else{
-                prev=first;
-                first=first->next;
-                second=second->next;
-            }
-        }
-        return head;
-    }
-//     Node* curr = head;
-// while(curr->next){
-//     if(curr->data < curr->next->data){
-//         curr->data = curr->next->data;
-//         Node* temp = curr->next;
-//         curr->next = curr->next->next;
-//         delete temp;
-//         curr = head;
-//     }
-//     else curr = curr->next;
-// }
-// return head;}
+        // First reversed the linked list
     
+        Node *cur = head;
+        Node *prev = NULL;
+        Node *next;
+    
+        while(cur!=NULL)
+        {
+            next = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = next;
+        }
+    
+        head = prev;
+    
+        // Link list is reversed till here
+    
+        // Computing and deleting the nodes which have larger nodes
+        // on the left
+    
+        Node *current = head;
+    
+        Node *maxNode = head;
+        Node *temp;
+    
+         while (current != NULL && current->next != NULL)
+         {
+             if(current->next->data < maxNode->data)
+             {
+                 temp = current->next;
+                 current->next = temp->next;
+                 free(temp);
+             }
+             else
+             {
+                 current = current->next;
+                 maxNode= current;
+             }
+         }
+         
+         // reversing list again to get required result :-
+         
+         cur = head;
+         prev = NULL;
+         next;
+         while(cur!=NULL)
+         {
+             next = cur->next;
+             cur->next = prev;
+             prev = cur;
+             cur = next;
+         }
+    
+         head = prev;
+         
+         // head of list can be returned now
+    
+        return head;
+    
+    }
 };
-   
-
 
 //{ Driver Code Starts.
 
