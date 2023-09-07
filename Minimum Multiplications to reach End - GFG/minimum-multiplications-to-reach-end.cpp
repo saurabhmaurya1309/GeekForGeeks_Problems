@@ -34,21 +34,11 @@ class Solution {
                     q.push({(i*x)%mod,c+1});
                     
                 }
-                
-                
-                
-        
+             
             }
-            
-            
-            
-            
-            
-            
+           
         }
-        
-        
-        
+       
         return -1;
         
     }
