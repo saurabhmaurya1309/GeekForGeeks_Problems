@@ -27,10 +27,26 @@ class Solution{
 	int maxSumIS(int arr[], int n)  
 	{  
 	    // Your code goes here
-	    vector<vector<int>>dp(n,vector<int>(n+1,-1));
-	    return solveMem(n,arr,0,-1,dp);
+	   // vector<vector<int>>dp(n,vector<int>(n+1,-1));
+	   // return solveMem(n,arr,0,-1,dp);
+	    vector<vector<int>>dp(n+1, vector<int>(n+1,0));
+        
+        for(int curr=n-1; curr>=0; curr--){
+            for(int prev=curr-1; prev>=-1; prev--){
+               
+        int incl = 0;
+       if(prev == -1 || arr[curr] > arr[prev]) 
+        incl = arr[curr] + dp[curr+1][curr+1];
+        
+       int excl = 0 + dp[curr+1][prev+1];
+       
+        dp[curr][prev+1] = max(incl,excl); 
+            }
+        }
+        return dp[0][0];
 	}  
 };
+
 
 //{ Driver Code Starts.
 int main() 
