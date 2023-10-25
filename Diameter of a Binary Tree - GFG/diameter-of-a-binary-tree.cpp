@@ -121,8 +121,8 @@ class Solution {
     pair<int,int>fastdiameter(Node*root){
         {
             if(root==NULL){
-                pair<int,int>p=make_pair(0,0);
-                return p;
+                // pair<int,int>p=make_pair(0,0);
+                return {0,0};
             }
             pair<int,int>left=fastdiameter(root->left);
             pair<int,int>right=fastdiameter(root->right);
