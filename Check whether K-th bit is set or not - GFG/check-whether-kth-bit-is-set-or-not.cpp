@@ -17,13 +17,14 @@ class Solution
     {
         // Your code here
         // It can be a one liner logic!! Think of it!!
-        int x=pow(2,k);
-        if(n&1<<k){
-            return 1;
-        }
-        return 0;
+        // int x=pow(2,k);
+       bool ans=n&1<<k?true:false;
+return ans;
+        
+        
     }
 };
+
 
 //{ Driver Code Starts.
 
