@@ -18,7 +18,7 @@ class Solution
         // Your code here
         // It can be a one liner logic!! Think of it!!
         int x=pow(2,k);
-        if(n&x){
+        if(n&1<<k){
             return 1;
         }
         return 0;
