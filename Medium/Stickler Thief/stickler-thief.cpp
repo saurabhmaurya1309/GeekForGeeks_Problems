@@ -8,75 +8,35 @@ class Solution
 {
     public:
     //Function to find the maximum money the thief can get.
-    int solve(int arr[], int n){
-        if(n<0)
+    int solve(int i,int arr[],int n){
+        if(i>=n){
             return 0;
-        if(n==0){
-            return arr[0];
-        } 
-        int incl=solve(arr,n-2)+arr[n];
-        int excl=solve(arr,n-1)+0;
-        return max(incl,excl);
-    }
-    int solveMem(int arr[], int n,vector<int>&dp){
-        if(n<0)
-            return 0;
-        if(n==0){
-            return arr[0];
-        } 
-        if(dp[n]!=-1)
-            return dp[n];
-        int incl=solveMem(arr,n-2,dp)+arr[n];
-        int excl=solveMem(arr,n-1,dp)+0;
-        dp[n]=max(incl,excl);
-        return dp[n];
-    }
-    // int solvetab(int arr[], int n){
-       
-    //     vector<int>dp(n,0);
-    //     dp[0]=arr[0];
-    //     for(int i=1;i<n;i++){
-    //         int incl=dp[i-2]+arr[i];
-    //         int excl=dp[i-1];
-    //         dp[i]=max(incl,excl);
-    //     }
-    //     return dp[n-1];
-    // }
-    int op(int arr[], int n){
-       
-        int prev2=0;
-        int prev1=arr[0];
-        for(int i=1;i<n;i++){
-            int incl=prev2+arr[i];
-            int excl=prev1;
-            int ans=max(incl,excl);
-            prev2=prev1;
-            prev1=ans;
         }
-        return prev1;
+        int include=arr[i]+solve(i+2,arr,n);
+        int exclude=solve(i+1,arr,n);
+        int ans=max(include,exclude);
+        return ans;
     }
-   
-    
+    int solveMem(int i,int arr[],int n,vector<int>&dp){
+        if(i>=n){
+            return 0;
+        }
+        if(dp[i]!=-1){
+            return dp[i];
+        }
+        int include=arr[i]+solveMem(i+2,arr,n,dp);
+        int exclude=solveMem(i+1,arr,n,dp);
+        dp[i]=max(include,exclude);
+        return dp[i];
+    }
     int FindMaxSum(int arr[], int n)
     {
-    //   int ans=solve(arr,n-1);
-    //   return ans;
-    // using dp
-    // vector<int>dp(n,-1);
-    // int ans=solveMem(arr,n-1,dp);
-    // return ans;
-    // }
-    // by tabulation
-    // int ans=solvetab(arr,n);
-    // return ans;
-    // }
-    
-    // space optimization
-    int ans=op(arr,n);
-    return ans;
+        // Your code here
+        // return solve(0,arr,n);
+        vector<int>dp(n+1,-1);
+        return solveMem(0,arr,n,dp);
     }
 };
-
 
 //{ Driver Code Starts.
 int main()
