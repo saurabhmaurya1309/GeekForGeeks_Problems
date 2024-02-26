@@ -45,16 +45,38 @@ class Solution
         dp[index][W]=max(exclude,include);
         return dp[index][W];
     }
+    int solveTab(int W,int wt[],int val[],int n){
+        vector<vector<int>>dp(n,vector<int>(W+1,0));
+        for(int i=wt[0];i<=W;i++){
+            if(wt[0]<=W){
+                dp[0][i]=val[0];
+            }
+        }
+        for(int i=1;i<n;i++){
+            for(int j=0;j<=W;j++){
+               int include=0;
+                if(wt[i]<=j){
+                    include=val[i]+dp[i-1][j-wt[i]];
+                }
+                int exclude=dp[i-1][j];
+                dp[i][j]=max(exclude,include);
+               
+            }
+        }
+         return dp[n-1][W]; 
+    }
     int knapSack(int W, int wt[], int val[], int n) 
     { 
        // Your code here
     //   int ans=solve(W,wt,val,n-1);
-    vector<vector<int>>dp(n,vector<int>(W+1,-1));
-    int ans=solveMem(W,wt,val,n-1,dp);
-       return ans;
+    // vector<vector<int>>dp(n,vector<int>(W+1,-1));
+    // int ans=solveMem(W,wt,val,n-1,dp);
+    //   return ans;
+        return solveTab(W,wt,val,n);
        
     }
 };
+
 
 
 //{ Driver Code Starts.
