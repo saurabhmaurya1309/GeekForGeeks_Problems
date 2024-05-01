@@ -8,31 +8,32 @@ class Solution {
   public:
     vector<int> max_of_subarrays(vector<int> arr, int n, int k) {
         // your code here
-        
-         int i=0;
-        int j=0;
-        vector<int>ans;
-        deque<int>l;
-        while(j<n)
-        {
-            while(l.size()>0 && l.back()<arr[j]){
-                l.pop_back();
-            }
-            l.push_back(arr[j]);
-          if(j-i+1<k)  {
-              j++;
-          }
-          else if(j-i+1==k){
-              ans.push_back(l.front());
-              if(l.front()==arr[i])
-              l.pop_front();
-              i++;
-              j++;
-              
-          }
-        }
-        return ans;
-    
+        vector<int> ans;
+    priority_queue<pair<int, int> > heap;
+ 
+    // Initialize the heap with the first k elements
+    for (int i = 0; i < k; i++)
+        heap.push({ arr[i], i });
+ 
+    // The maximum element in the first window
+    ans.push_back(heap.top().first);
+ 
+    // Process the remaining elements
+    for (int i = k; i < arr.size(); i++) {
+ 
+        // Add the current element to the heap
+        heap.push({ arr[i], i });
+ 
+        // Remove elements that are outside the current
+        // window
+        while (heap.top().second <= i - k)
+            heap.pop();
+ 
+        // The maximum element in the current window
+        ans.push_back(heap.top().first);
+    }
+ 
+    return ans;
     }
 };
 
