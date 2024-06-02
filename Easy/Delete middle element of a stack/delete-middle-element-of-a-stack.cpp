@@ -11,18 +11,22 @@ class Solution
 {
     public:
     //Function to delete middle element of a stack.
+    void solve(stack<int>&s,int size,int cnt){
+        if(cnt==size/2){
+            s.pop();
+            return;
+        }
+        int temp=s.top();
+        s.pop();
+        solve(s,size,cnt+1);
+        s.push(temp);
+        
+    }
     void deleteMid(stack<int>&s, int sizeOfStack)
     {
         // code here.. 
-        vector<int>store;
-        while(s.size()!=(sizeOfStack-1)/2){
-            store.push_back(s.top());
-            s.pop();
-            
-        }
-        for(int i=store.size()-2;i>=0;i--){
-            s.push(store[i]);
-        }
+        solve(s,sizeOfStack,0);
+       
         
     }
 };
