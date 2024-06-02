@@ -28,11 +28,13 @@ void insertAtBottom(stack<int> &st, int item) {
         int temp=St.top();
         St.pop();
         Reverse(St);
+       
         insertAtBottom(St,temp);
         return;
         
     }
 };
+
 
 //{ Driver Code Starts.
 
