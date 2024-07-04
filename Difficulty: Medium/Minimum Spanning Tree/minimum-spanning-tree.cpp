@@ -5,31 +5,62 @@ using namespace std;
 // } Driver Code Ends
 class Solution
 {
+    private:
+    int findParent(vector<int>&parent,int node){
+        if(node==parent[node]){
+            return node;
+        }
+        return parent[node]=findParent(parent,parent[node]);
+    }
+    void unionSet(int u,int v,vector<int>&parent,vector<int>&rank){
+        int ulp_u=findParent(parent,u);
+        int ulp_v=findParent(parent,v);
+        if(rank[ulp_u]<rank[ulp_v]){
+            parent[ulp_u]=ulp_v;
+        }
+        else if(rank[ulp_u]>rank[ulp_v]){
+            parent[ulp_v]=ulp_u;
+        }
+        else{
+            parent[ulp_v]=ulp_u;
+            rank[ulp_u]++;
+        }
+        
+    }
 	public:
 	//Function to find sum of weights of edges of the Minimum Spanning Tree.
     int spanningTree(int V, vector<vector<int>> adj[])
     {
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-        vector<int>visited(V,0);
-        pq.push({0,0});
-        int sum=0;
-        while(!pq.empty()){
-            int node=pq.top().second;
-            int wt=pq.top().first;
-            pq.pop();
-            if(visited[node]==1)
-                continue;
-            visited[node]=1;
-            sum+=wt;
-            for(auto it:adj[node]){
-                int child=it[0];
-                int childwt=it[1];
-                if(!visited[child]){
-                    pq.push({childwt,child});
-                }
+        // code here
+        vector<pair<int,pair<int,int>>>store;
+        for(int i=0;i<V;i++){
+            for(auto it:adj[i]){
+                int u=i;
+                int v=it[0];
+                int wt=it[1];
+                store.push_back({wt,{u,v}});
             }
         }
-        return sum;
+        sort(store.begin(),store.end());
+        vector<int>parent(V);
+        vector<int>rank(V);
+        for(int i=0;i<V;i++){
+            parent[i]=i;
+            rank[i]=0;
+        }
+        int ans=0;
+        for(auto it:store){
+            int wt=it.first;
+            int u=it.second.first;
+            int v=it.second.second;
+            int pu=findParent(parent,u);
+            int pv=findParent(parent,v);
+            if(pu!=pv){
+                ans+=wt;
+                unionSet(u,v,parent,rank);
+            }
+        }
+        return ans;
     }
 };
 
